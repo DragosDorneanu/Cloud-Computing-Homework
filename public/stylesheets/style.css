@@ -1,8 +1,12 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.centered {
+    left: 25%;
+    top: 25%;
+    bottom: 25%;
+    right: 25%;
 }
 
-a {
-  color: #00B7FF;
+.full-size {
+    height: 100%;
+    width: 100%;
 }
+

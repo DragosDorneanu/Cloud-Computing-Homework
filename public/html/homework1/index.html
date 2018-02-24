@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      ng-app="apisCallflow"
+      class="full-size"
+      ng-cloak>
 <head>
     <meta charset="UTF-8">
     <title>Homework 1</title>
+    <link rel="stylesheet" href="../../stylesheets/style.css">
+    <link rel="stylesheet" href="../../stylesheets/homework1/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-<body>
-    Homework 1 Index
+
+<body class="full-size">
+
+<ng-view></ng-view>
+
+<script src="scripts/angular/angular.min.js"></script>
+<script src="scripts/angular-route/angular-route.min.js"></script>
+<script src="../../javascripts/homework1/app.js"></script>
+<script src="../../javascripts/homework1/controllers/LoginController.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
+
 </html>

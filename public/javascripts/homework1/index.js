@@ -1,1 +1,0 @@
-console.log('Homework 1 index.js');
