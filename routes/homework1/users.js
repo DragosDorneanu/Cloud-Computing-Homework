@@ -7,7 +7,10 @@ const codeforces = new CodeforcesApiCaller();
 router.get('/:userHandler', function (request, response) {
     codeforces
         .getUserData(request.params.userHandler)
-        .then((data) => response.end(data))
+        .then((data) => {
+            data.locationDetails = response.locationDetails
+            response.end(JSON.stringify(data));
+        });
 });
 
 module.exports = router;

@@ -15,6 +15,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "node-rest-client": "^3.1.0",
+    "node-where": "^1.1.0",
     "serve-favicon": "~2.4.5"
   }
 }

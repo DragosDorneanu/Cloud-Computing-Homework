@@ -1,8 +1,10 @@
-<div ng-show="fetchingUserData">
-    <img class="centered-image"
-         src="../../../images/loading-gif.gif"/>
-</div>
+<div class="full-size">
+    <div ng-show="fetchingUserData">
+        <img class="centered-image"
+             src="../../../images/loading-gif.gif"/>
+    </div>
 
-<div ng-show="!fetchingUserData">
-    <p>{{userData}}}</p>
+    <div ng-show="!fetchingUserData" id="main-page">
+        <p ng-repeat="(infoName, info) in userData.result[0]">{{infoName}}: {{info}}</p>
+    </div>
 </div>

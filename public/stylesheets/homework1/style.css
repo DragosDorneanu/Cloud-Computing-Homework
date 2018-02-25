@@ -1,3 +1,8 @@
 #user-handler {
     margin-bottom: 5px;
 }
+
+#main-page {
+    background: url("https://it-edu.mipt.ru/sites/default/files/codeforceslogo.png") no-repeat;
+    background-size: contain;
+}

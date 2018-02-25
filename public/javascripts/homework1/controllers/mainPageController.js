@@ -8,7 +8,7 @@ angular.module('apisCallflow')
                 .then(collectedUserDataCallback);
 
             function collectedUserDataCallback(response) {
-                $scope.userData = JSON.stringify(response.data, undefined, 2);
+                $scope.userData = response.data;
                 $scope.fetchingUserData = false;
                 $scope.$apply();
             }
