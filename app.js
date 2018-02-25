@@ -3,11 +3,10 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const GoogleGeocodingApiCaller = require('./utils/homework1/GoogleGeocodingApiCaller');
 
-const geocode = new GoogleGeocodingApiCaller();
 const homework1Index = require('./routes/homework1/index');
 const homework1Users = require('./routes/homework1/users');
+const homework1Countries = require('./routes/homework1/countries');
 
 const app = express();
 
@@ -18,9 +17,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(path.join(__dirname, 'node_modules')));
 
-app.use('/hw1/users/:userHandler', geocode.getLocationByIpMiddleware);
-
 app.use('/hw1', homework1Index);
 app.use('/hw1/users', homework1Users);
+app.use('/hw1/countries', homework1Countries);
 
 module.exports = app;

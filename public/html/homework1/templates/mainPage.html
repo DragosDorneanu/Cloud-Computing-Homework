@@ -5,6 +5,6 @@
     </div>
 
     <div ng-show="!fetchingUserData" id="main-page">
-        <p ng-repeat="(infoName, info) in userData.result[0]">{{infoName}}: {{info}}</p>
+        <p ng-repeat="(infoName, info) in userData['codeforcesProfile'].result">{{infoName}}: {{info}}</p>
     </div>
 </div>
