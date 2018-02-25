@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', function (req, res, next) {
+router.get('/', function (request, response) {
     const options = {
         root: 'public/html'
     };
@@ -10,7 +10,8 @@ router.get('/', function (req, res, next) {
             throw new Error(error);
         }
     };
-    res.sendFile('homework1/index.html', options, callback);
+    response.sendFile('homework1/index.html', options, callback);
 });
+
 
 module.exports = router;

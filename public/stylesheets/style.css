@@ -10,3 +10,8 @@
     width: 100%;
 }
 
+.centered-image {
+    display: block;
+    margin: auto;
+    vertical-align: middle;
+}

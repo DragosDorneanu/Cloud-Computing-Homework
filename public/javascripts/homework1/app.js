@@ -1,14 +1,19 @@
 angular.module('apisCallflow', ['ngRoute'])
     .config(($routeProvider) => {
-        const routeConfig = {
-            controller: 'LoginController',
+        const loginConfig = {
+            controller: 'loginController',
             templateUrl: 'html/homework1/templates/login.html'
+        };
+        const mainPageConfig = {
+            controller: 'mainPageController',
+            templateUrl: 'html/homework1/templates/mainPage.html'
         };
         const otherwiseConfig = {
             redirectTo: '/hw1'
         };
 
         $routeProvider
-            .when('/hw1', routeConfig)
+            .when('/', loginConfig)
+            .when('/mainPage/:userHandler', mainPageConfig)
             .otherwise(otherwiseConfig)
     });

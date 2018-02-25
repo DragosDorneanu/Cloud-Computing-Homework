@@ -1,7 +1,14 @@
 <div class="centered col-xs-12 col-sm-12 col-md-6 col-lg-6">
     <div class="form-group">
         <label for="user-handler">Codeforces User Handler</label>
-        <input class="form-control" id="user-handler">
+        <input class="form-control"
+               id="user-handler"
+               ng-model="userHandler"
+               ng-keypress="loginUser($event, userHandler)">
+        <button class="btn btn-primary"
+                ng-click="loginUser($event, userHandler)">
+            Enter
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </button>
     </div>
-    <button class="btn btn-primary">Enter</button>
 </div>
