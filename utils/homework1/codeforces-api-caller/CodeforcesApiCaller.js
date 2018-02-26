@@ -1,5 +1,5 @@
 const Client = require('node-rest-client').Client;
-const {jsdom} = require('jsdom');
+const {JSDOM} = require('jsdom');
 
 function CodeforcesApiCaller() {
     const restClient = new Client;
@@ -60,23 +60,19 @@ function CodeforcesApiCaller() {
         });
     };
 
-    this.getProblemText = function (contestId, problemIndex) {
+    // extract content by class name: input-specification, output-specification, sample-tests, note
+    this.getProblemContent = function (contestId, problemIndex) {
         return new Promise((resolve, reject) => {
             const requestLink = `http://codeforces.com/problemset/problem/${contestId}/${problemIndex}`;
-            const getProblemTextFromHtml = (html) => {
-                // jsdom parse
-                resolve(html);
+            const resolveProblemContent = (dom) => {
+                const problemStatement = dom.window.document.getElementsByClassName('problem-statement');
+                resolve(problemStatement[0].textContent);
             };
-            get(requestLink)
-                .then((data) => resolve(data.toString()))
-                .catch((error) => reject(error.toString()));
+            JSDOM.fromURL(requestLink)
+                .then((dom) => resolveProblemContent(dom))
+                .catch((error) => console.error(error));
         });
     };
 }
-
-new CodeforcesApiCaller()
-    .getProblemText(566, 'A')
-    .then((problems) => console.log(problems))
-    .catch((error) => console.error(error));
 
 module.exports = CodeforcesApiCaller;
