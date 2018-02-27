@@ -1,7 +1,6 @@
 <div class="full-size">
     <div ng-show="fetchingUserData">
-        <img class="centered-image"
-             src="../../../images/loading-gif.gif"/>
+        <img class="centered-image" src="../../../images/loading-gif.gif"/>
     </div>
 
     <div class="full-size" ng-show="!fetchingUserData">
@@ -9,53 +8,80 @@
             <img src="https://it-edu.mipt.ru/sites/default/files/codeforceslogo.png" class="header-image"/>
             <div class="user-profile col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <legend>
-                    <span class="glyphicon glyphicon-user"></span>
                     User Profile
                 </legend>
-                <div class="user-data col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <p>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-sunglasses"></span>
                         Handle: {{codeforcesProfile.handle}}
                     </p>
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-align-justify"></span>
                         Rank: {{codeforcesProfile.rank}}
                     </p>
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-triangle-top"></span>
                         Max. Rank: {{codeforcesProfile.maxRank}}
                     </p>
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-saved"></span>
                         Rating: {{codeforcesProfile.rating}}</p>
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-open"></span>
                         Max. Rating: {{codeforcesProfile.maxRating}}
                     </p>
                 </div>
                 <div class="user-data col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-star-empty"></span>
                         Contribution: {{codeforcesProfile.contribution}}
                     </p>
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-time"></span>
                         Registration Time: {{getFormattedTime(codeforcesProfile.registrationTimeSeconds)}}
                     </p>
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-time"></span>
                         Last Online Time: {{getFormattedTime(codeforcesProfile.lastOnlineTimeSeconds)}}
                     </p>
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-star"></span>
                         Friend Of: {{codeforcesProfile.friendOfCount}}
                     </p>
-                    <p>
+                    <p class="user-data">
                         <span class="glyphicon glyphicon-search"></span>
-                        Avatar: {{codeforcesProfile.avatar}}
+                        Avatar: <a href={{codeforcesProfile.avatar}}>{{codeforcesProfile.avatar}}</a>
                     </p>
                 </div>
             </div>
+        </div>
+
+        <div ng-show="fetchingContests">
+            <img class="centered-image" src="../../../images/loading.gif"/>
+        </div>
+
+        <div class="contest-observer form-group"
+             ng-show="!fetchingContests">
+            <div class="header contest-table-options">
+                <button class="btn btn-primary" ng-click="searchForContests(contestsLocation)">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+                <select class="form-control"
+                        ng-model="contestsLocation"
+                        id="contest-country-select">
+                    <option ng-repeat="country in countries">{{country}}</option>
+                </select>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <th ng-repeat="info in getContestTableHeader(codeforcesContests[0])">{{info}}</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="contest in codeforcesContests">
+                    <td ng-repeat="info in contest">{{info}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

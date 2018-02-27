@@ -3,12 +3,16 @@
 }
 
 .header-image {
-    height: 20% !important;
+    height: 5% !important;
     width: 50% !important;
 }
 
 .user-profile {
     height: 40%;
+}
+
+.user-data {
+    font-size: 16px;
 }
 
 .header {
@@ -19,4 +23,17 @@
 
 .user-profile, .header-image {
     margin-top: 2px;
+}
+
+.contest-table-options {
+    width: 20%;
+    float: right;
+}
+
+.contest-observer {
+    margin: 5% 1%;
+}
+
+.contest-country-select {
+    margin-left: 1%;
 }
