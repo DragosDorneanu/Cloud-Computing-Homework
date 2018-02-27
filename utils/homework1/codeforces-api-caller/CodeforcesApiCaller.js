@@ -110,8 +110,4 @@ function CodeforcesApiCaller() {
     };
 }
 
-new CodeforcesApiCaller()
-    .getProblemContent('940', 'F')
-    .then((problem) => console.log(JSON.stringify(problem, undefined, 2)))
-    .catch((error) => console.error(error));
 module.exports = CodeforcesApiCaller;
