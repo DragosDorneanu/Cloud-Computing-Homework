@@ -21,7 +21,7 @@ function CodeforcesApiCaller() {
             const requestLink = `http://codeforces.com/api/user.info?handles=${userHandler}`;
             restClient.get(requestLink, (data, response) => {
                 data.result = data.result[0];
-                resolve(data)
+                resolve(data.result)
             });
         });
     };
@@ -60,7 +60,6 @@ function CodeforcesApiCaller() {
         });
     };
 
-    // extract content by class name: header, input-specification, output-specification, sample-tests, note
     this.getProblemContent = function (contestId, problemIndex) {
         return new Promise((resolve, reject) => {
             const requestLink = `http://codeforces.com/problemset/problem/${contestId}/${problemIndex}`;

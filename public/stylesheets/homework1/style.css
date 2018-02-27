@@ -2,7 +2,21 @@
     margin-bottom: 5px;
 }
 
-#main-page {
-    background: url("https://it-edu.mipt.ru/sites/default/files/codeforceslogo.png") no-repeat;
-    background-size: contain;
+.header-image {
+    height: 20% !important;
+    width: 50% !important;
+}
+
+.user-profile {
+    height: 40%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row-reverse;
+}
+
+.user-profile, .header-image {
+    margin-top: 2px;
 }

@@ -4,7 +4,58 @@
              src="../../../images/loading-gif.gif"/>
     </div>
 
-    <div ng-show="!fetchingUserData" id="main-page">
-        <p ng-repeat="(infoName, info) in userData['codeforcesProfile'].result">{{infoName}}: {{info}}</p>
+    <div class="full-size" ng-show="!fetchingUserData">
+        <div class="header">
+            <img src="https://it-edu.mipt.ru/sites/default/files/codeforceslogo.png" class="header-image"/>
+            <div class="user-profile col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <legend>
+                    <span class="glyphicon glyphicon-user"></span>
+                    User Profile
+                </legend>
+                <div class="user-data col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p>
+                        <span class="glyphicon glyphicon-sunglasses"></span>
+                        Handle: {{codeforcesProfile.handle}}
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                        Rank: {{codeforcesProfile.rank}}
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-triangle-top"></span>
+                        Max. Rank: {{codeforcesProfile.maxRank}}
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-saved"></span>
+                        Rating: {{codeforcesProfile.rating}}</p>
+                    <p>
+                        <span class="glyphicon glyphicon-open"></span>
+                        Max. Rating: {{codeforcesProfile.maxRating}}
+                    </p>
+                </div>
+                <div class="user-data col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        Contribution: {{codeforcesProfile.contribution}}
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-time"></span>
+                        Registration Time: {{getFormattedTime(codeforcesProfile.registrationTimeSeconds)}}
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-time"></span>
+                        Last Online Time: {{getFormattedTime(codeforcesProfile.lastOnlineTimeSeconds)}}
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-star"></span>
+                        Friend Of: {{codeforcesProfile.friendOfCount}}
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-search"></span>
+                        Avatar: {{codeforcesProfile.avatar}}
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

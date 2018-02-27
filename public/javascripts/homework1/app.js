@@ -1,4 +1,4 @@
-angular.module('apisCallflow', ['ngRoute'])
+angular.module('apisCallflow', ['ngRoute', 'angularMoment'])
     .config(($routeProvider) => {
         const loginConfig = {
             controller: 'loginController',
