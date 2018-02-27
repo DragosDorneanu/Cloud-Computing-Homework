@@ -56,12 +56,7 @@
             </div>
         </div>
 
-        <div ng-show="fetchingContests">
-            <img class="centered-image" src="../../../images/loading.gif"/>
-        </div>
-
-        <div class="contest-observer form-group"
-             ng-show="!fetchingContests">
+        <div class="contest-observer form-group">
             <div class="header contest-table-options">
                 <button class="btn btn-primary" ng-click="searchForContests(contestsLocation)">
                     <span class="glyphicon glyphicon-search"></span>
@@ -76,12 +71,15 @@
                 <thead>
                 <th ng-repeat="info in getContestTableHeader(codeforcesContests[0])">{{info}}</th>
                 </thead>
-                <tbody>
+                <tbody ng-show="!fetchingContests">
                 <tr ng-repeat="contest in codeforcesContests">
                     <td ng-repeat="info in contest">{{info}}</td>
                 </tr>
                 </tbody>
             </table>
+            <div ng-show="fetchingContests">
+                <img class="centered-image" src="../../../images/loading.gif"/>
+            </div>
         </div>
     </div>
 </div>
