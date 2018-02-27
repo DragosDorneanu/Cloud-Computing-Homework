@@ -58,11 +58,14 @@
 
         <div class="contest-observer form-group">
             <div class="header contest-table-options">
-                <button class="btn btn-primary" ng-click="searchForContests(contestsLocation)">
+                <button class="btn btn-primary"
+                        ng-click="searchForContests(contestsLocation)"
+                        ng-disabled="fetchingContests">
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
                 <select class="form-control"
                         ng-model="contestsLocation"
+                        ng-disabled="fetchingContests"
                         id="contest-country-select">
                     <option ng-repeat="country in countries">{{country}}</option>
                 </select>
