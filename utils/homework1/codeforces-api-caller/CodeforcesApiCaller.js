@@ -77,10 +77,19 @@ function CodeforcesApiCaller() {
 
             const resolveProblemContent = (dom) => {
                 const document = dom.window.document;
-                const inputSpecifications = document.getElementsByClassName('input-specification')[0]
-                    .getElementsByTagName('p');
-                const outputSpecifications = document.getElementsByClassName('output-specification')[0]
-                    .getElementsByTagName('p');
+
+                const getTextContentFrom = (elementsList) => {
+                    let textContents = {};
+                    for (let index = 0; index < elementsList.length; ++index) {
+                        textContents[index] = elementsList[index].textContent;
+                    }
+                    return textContents;
+                };
+
+                const header = getTextContentFrom(document.getElementsByClassName('header')[0].getElementsByTagName('div'));
+                const story = getTextContentFrom(document.getElementsByClassName('problem-statement')[0].childNodes[1].getElementsByTagName('p'));
+                const inputSpecifications = getTextContentFrom(document.getElementsByClassName('input-specification')[0].getElementsByTagName('p'));
+                const outputSpecifications = getTextContentFrom(document.getElementsByClassName('output-specification')[0].getElementsByTagName('p'));
                 const test = document.getElementsByClassName('sample-test')[0];
                 const testInputs = test.getElementsByClassName('input');
                 const testOutputs = test.getElementsByClassName('output');
@@ -89,8 +98,10 @@ function CodeforcesApiCaller() {
                     'output': getPresContentFrom(testOutputs)
                 };
                 let note = document.getElementsByClassName('note');
-                note = note ? document.getElementsByClassName('note')[0].getElementsByTagName('p') : {};
-                resolve({inputSpecifications, outputSpecifications, sampleTest, note});
+                if (note) {
+                    note = getTextContentFrom(document.getElementsByClassName('note')[0].getElementsByTagName('p'))
+                }
+                resolve({header, story, inputSpecifications, outputSpecifications, sampleTest, note});
             };
             JSDOM.fromURL(requestLink)
                 .then((dom) => resolveProblemContent(dom))
@@ -99,4 +110,8 @@ function CodeforcesApiCaller() {
     };
 }
 
+new CodeforcesApiCaller()
+    .getProblemContent('940', 'F')
+    .then((problem) => console.log(JSON.stringify(problem, undefined, 2)))
+    .catch((error) => console.error(error));
 module.exports = CodeforcesApiCaller;
