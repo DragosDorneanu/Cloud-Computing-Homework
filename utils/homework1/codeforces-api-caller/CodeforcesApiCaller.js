@@ -60,13 +60,37 @@ function CodeforcesApiCaller() {
         });
     };
 
-    // extract content by class name: input-specification, output-specification, sample-tests, note
+    // extract content by class name: header, input-specification, output-specification, sample-tests, note
     this.getProblemContent = function (contestId, problemIndex) {
         return new Promise((resolve, reject) => {
             const requestLink = `http://codeforces.com/problemset/problem/${contestId}/${problemIndex}`;
+
+            const getPresContentFrom = (presContainer) => {
+                let contents = [];
+                for (let containerIndex = 0; containerIndex < presContainer.length; ++containerIndex) {
+                    let container = presContainer[containerIndex];
+                    let pre = container.childNodes[1];
+                    contents.push(pre.innerHTML.replace(/<br>/g, '\n'));
+                }
+                return contents;
+            };
+
             const resolveProblemContent = (dom) => {
-                const problemStatement = dom.window.document.getElementsByClassName('problem-statement');
-                resolve(problemStatement[0].textContent);
+                const document = dom.window.document;
+                const inputSpecifications = document.getElementsByClassName('input-specification')[0]
+                    .getElementsByTagName('p');
+                const outputSpecifications = document.getElementsByClassName('output-specification')[0]
+                    .getElementsByTagName('p');
+                const test = document.getElementsByClassName('sample-test')[0];
+                const testInputs = test.getElementsByClassName('input');
+                const testOutputs = test.getElementsByClassName('output');
+                const sampleTest = {
+                    'input': getPresContentFrom(testInputs),
+                    'output': getPresContentFrom(testOutputs)
+                };
+                let note = document.getElementsByClassName('note');
+                note = note ? document.getElementsByClassName('note')[0].getElementsByTagName('p') : {};
+                resolve({inputSpecifications, outputSpecifications, sampleTest, note});
             };
             JSDOM.fromURL(requestLink)
                 .then((dom) => resolveProblemContent(dom))
