@@ -23,7 +23,6 @@ angular.module('apisCallflow')
             };
 
             function getProblemContentCallback(response) {
-                console.log(response.data);
                 $scope.showedProblem = response.data;
                 try {
                     $scope.showedProblem.sampleTest = zip($scope.showedProblem.sampleTest.input, $scope.showedProblem.sampleTest.output);
@@ -38,7 +37,6 @@ angular.module('apisCallflow')
             function fetchedContestProblemsCallback(response) {
                 $scope.problems = response.data;
                 $scope.fetchingProblems = false;
-                console.log($scope.problems);
                 $scope.$apply();
             }
 

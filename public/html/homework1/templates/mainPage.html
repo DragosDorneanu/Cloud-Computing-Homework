@@ -72,12 +72,12 @@
             </div>
             <table class="table table-striped">
                 <thead>
-                <th ng-repeat="info in getContestTableHeader(codeforcesContests[0])">{{info}}</th>
+                <th ng-repeat="info in getContestTableHeader(contestTableHeads)">{{info}}</th>
                 </thead>
                 <tbody ng-show="!fetchingContests">
                 <tr ng-repeat="contest in codeforcesContests"
                     ng-click="getContestProblems(contest)">
-                    <td ng-repeat="info in contest">{{info}}</td>
+                    <td ng-repeat="info in getContestInfo(contest)">{{info}}</td>
                 </tr>
                 </tbody>
             </table>

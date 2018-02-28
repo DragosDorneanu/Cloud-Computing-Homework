@@ -90,3 +90,7 @@
     top: 0;
     text-align: center;
 }
+
+td {
+    width: 5%;
+}

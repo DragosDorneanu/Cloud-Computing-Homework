@@ -7,6 +7,10 @@ angular.module('apisCallflow')
             $scope.codeforcesProfile = {};
             $scope.codeforcesContests = [];
             $scope.fetchingContests = false;
+            $scope.contestTableHeads = [
+                'id', 'name', 'type', 'phase', 'durationSeconds', 'preparedBy',
+                'description', 'difficulty', 'kind', 'country', 'city'
+            ];
 
             const toColumnTitle = function (propertyName) {
                 let spacedPropertyName = propertyName.replace(/([A-Z])/g, " $1");
@@ -34,18 +38,26 @@ angular.module('apisCallflow')
                 return date.format('DD/MM/YYYY hh:mm:ss A');
             };
 
-            $scope.getContestTableHeader = function (contest) {
+            $scope.getContestTableHeader = function (heads) {
                 let columnName;
                 let tableHeader = [];
-                for (let property in contest) {
-                    if (property[0] !== '$') {
-                        columnName = toColumnTitle(property);
-                        tableHeader.push(columnName);
-                    }
+                for (let index in heads) {
+                    columnName = toColumnTitle(heads[index]);
+                    tableHeader.push(columnName);
                 }
                 return tableHeader;
             };
 
+            $scope.getContestInfo = function (contest) {
+                let head;
+                let info = [];
+
+                for (let index in $scope.contestTableHeads) {
+                    head = $scope.contestTableHeads[index];
+                    info.push(contest[head]);
+                }
+                return info;
+            };
             $scope.getContestProblems = function (contest) {
                 $location.path(`/contests/${contest.id}/problems`);
             };
@@ -56,14 +68,13 @@ angular.module('apisCallflow')
 
             countriesCollectorService
                 .getWorldCountries()
-                .then((response) => {
-                    $scope.countries = response.data;
-                });
+                .then((response) => $scope.countries = response.data);
 
             function collectedUserDataCallback(response) {
                 $scope.locationDetails = response.data.locationDetails;
                 $scope.codeforcesProfile = response.data.codeforcesProfile;
                 $scope.codeforcesContests = response.data.codeforcesContests;
+                console.log($scope.codeforcesContests);
                 $scope.contestsLocation = $scope.locationDetails.country;
                 $scope.fetchingUserData = false;
                 $scope.$apply();
