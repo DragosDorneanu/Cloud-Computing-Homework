@@ -75,7 +75,8 @@
                 <th ng-repeat="info in getContestTableHeader(codeforcesContests[0])">{{info}}</th>
                 </thead>
                 <tbody ng-show="!fetchingContests">
-                <tr ng-repeat="contest in codeforcesContests">
+                <tr ng-repeat="contest in codeforcesContests"
+                    ng-click="getContestProblems(contest)">
                     <td ng-repeat="info in contest">{{info}}</td>
                 </tr>
                 </tbody>

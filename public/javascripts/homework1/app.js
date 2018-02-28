@@ -8,6 +8,10 @@ angular.module('apisCallflow', ['ngRoute', 'angularMoment'])
             controller: 'mainPageController',
             templateUrl: 'html/homework1/templates/mainPage.html'
         };
+        const contestProblemsPageConfig = {
+            controller: 'contestProblemsPageController',
+            templateUrl: 'html/homework1/templates/contestProblemsPage.html'
+        };
         const otherwiseConfig = {
             redirectTo: '/hw1'
         };
@@ -15,5 +19,6 @@ angular.module('apisCallflow', ['ngRoute', 'angularMoment'])
         $routeProvider
             .when('/', loginConfig)
             .when('/mainPage/:userHandler', mainPageConfig)
+            .when('/contests/:contestId/problems', contestProblemsPageConfig)
             .otherwise(otherwiseConfig)
     });

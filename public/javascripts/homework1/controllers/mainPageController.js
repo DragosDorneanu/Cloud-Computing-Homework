@@ -1,6 +1,6 @@
 angular.module('apisCallflow')
-    .controller('mainPageController', ['$scope', '$routeParams', 'dataCollectorService', 'countriesCollectorService', 'moment',
-        function ($scope, $routeParams, dataCollectorService, countriesCollectorService, moment) {
+    .controller('mainPageController', ['$scope', '$routeParams', '$location', 'dataCollectorService', 'countriesCollectorService', 'moment',
+        function ($scope, $routeParams, $location, dataCollectorService, countriesCollectorService, moment) {
             $scope.fetchingUserData = true;
             $scope.countries = [];
             $scope.locationDetails = {};
@@ -44,6 +44,10 @@ angular.module('apisCallflow')
                     }
                 }
                 return tableHeader;
+            };
+
+            $scope.getContestProblems = function (contest) {
+                $location.path(`/contests/${contest.id}/problems`);
             };
 
             dataCollectorService

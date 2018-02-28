@@ -12,4 +12,11 @@ router.get('/:country', function (request, response) {
         .catch((error) => console.error(error));
 });
 
+router.get('/:contestId/problems', function (request, response) {
+    codeforces
+        .getContestProblemsList(request.params.contestId)
+        .then((problemsList) => response.end(JSON.stringify(problemsList)))
+        .catch((error) => console.error(error));
+});
+
 module.exports = router;

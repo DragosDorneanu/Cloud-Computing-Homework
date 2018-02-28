@@ -12,7 +12,14 @@ angular.module('apisCallflow')
                 getContests: (country) => {
                     return new Promise((resolve, reject) => {
                         request.get(serverInfo, `hw1/contests/${country}`)
-                            .then((response) => resolve(response))
+                            .then((response) => resolve(response));
+                    });
+                },
+
+                getContestProblems: (contestId) => {
+                    return new Promise((resolve, reject) => {
+                        request.get(serverInfo, `hw1/contests/${contestId}/problems`)
+                            .then((response) => resolve(response));
                     });
                 }
             }
