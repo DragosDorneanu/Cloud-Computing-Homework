@@ -37,3 +37,25 @@
 .contest-country-select {
     margin-left: 1%;
 }
+
+.problems-list {
+    list-style-type: none;
+}
+
+.problems-list > li {
+    display: flex;
+    margin: 3px;
+}
+
+.centered-problems {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.problem-btn {
+    flex: 2;
+    font-size: 16px !important;
+    padding: 3% !important;
+    width: 500px;
+}

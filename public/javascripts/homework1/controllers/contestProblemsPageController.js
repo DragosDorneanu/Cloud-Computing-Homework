@@ -4,13 +4,17 @@ angular.module('apisCallflow')
             $scope.problems = [];
             $scope.fetchingProblems = true;
 
+            $scope.openProblemDialog = function (problem) {
+
+            };
+
+            dataCollectorService
+                .getContestProblems($routeParams.contestId)
+                .then(fetchedContestProblemsCallback);
+
             function fetchedContestProblemsCallback(response) {
                 $scope.problems = response.data;
                 $scope.fetchingProblems = false;
                 $scope.$apply();
             }
-
-            dataCollectorService
-                .getContestProblems($routeParams.contestId)
-                .then(fetchedContestProblemsCallback);
         }]);

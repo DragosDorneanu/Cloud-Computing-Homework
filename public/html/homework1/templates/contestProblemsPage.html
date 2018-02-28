@@ -2,4 +2,17 @@
     <div ng-show="fetchingProblems">
         <img class="centered-image" src="../../../images/loading-gif.gif"/>
     </div>
+
+    <div ng-show="!fetchingProblems" class="full-size centered-problems">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 centered-problems">
+            <ul class="problems-list">
+                <li ng-repeat="problem in problems">
+                    <button class="btn btn-primary problem-btn"
+                            ng-click="openProblemDialog(problem)">
+                        {{problem.index}}. {{problem.name}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
