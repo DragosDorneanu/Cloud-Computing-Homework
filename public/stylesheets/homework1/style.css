@@ -80,6 +80,13 @@
 
 #exit-problem-button {
     float: right;
+    position: fixed;
     font-size: 20px;
     margin: 2px;
+}
+
+#problem-not-available-warning {
+    position: absolute;
+    top: 0;
+    text-align: center;
 }

@@ -16,6 +16,12 @@
         </div>
     </div>
 
+    <div ng-show="!fetchingProblems && !showingProblem && problemNotAvailable"
+         class="alert alert-info col-xs-12 col-sm-12 col-md-12 col-lg-12"
+         id="problem-not-available-warning">
+        <strong>Info!</strong> Problem content is not available.
+    </div>
+
     <div ng-show="!fetchingProblems && showingProblem" class="full-size">
         <span class="glyphicon glyphicon-remove"
               id="exit-problem-button"
