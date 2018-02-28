@@ -3,16 +3,46 @@
         <img class="centered-image" src="../../../images/loading-gif.gif"/>
     </div>
 
-    <div ng-show="!fetchingProblems" class="full-size centered-problems">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 centered-problems">
+    <div ng-show="!fetchingProblems && !showingProblem" class="full-size centered-problems">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 centered-problems">
             <ul class="problems-list">
                 <li ng-repeat="problem in problems">
                     <button class="btn btn-primary problem-btn"
-                            ng-click="openProblemDialog($event, problem)">
+                            ng-click="getProblemContent(problem)">
                         {{problem.index}}. {{problem.name}}
                     </button>
                 </li>
             </ul>
+        </div>
+    </div>
+
+    <div ng-show="!fetchingProblems && showingProblem" class="full-size">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 centered-problems-statement">
+            <div class="problem-header page-header">
+                <p ng-repeat="headerInfo in showedProblem.header">{{headerInfo}}</p>
+            </div>
+            <div class="problem-story">
+                <b>Story</b>
+                <p ng-repeat="storyInfo in showedProblem.story">{{storyInfo}}</p>
+            </div>
+            <div class="problem-input-specification">
+                <b>Input</b>
+                <p ng-repeat="inputSpecification in showedProblem.inputSpecifications">{{inputSpecification}}</p>
+            </div>
+            <div class="problem-output-specification">
+                <b>Output</b>
+                <p ng-repeat="outputSpecification in showedProblem.outputSpecifications">{{outputSpecification}}</p>
+            </div>
+            <div class="problem-sample-tests">
+                <div ng-repeat="index in showedProblem.sampleTest.length">
+                    <div class="input">{{showedProblem.sampleTest.input[index]}}</div>
+                    <div class="output">{{showedProblem.sampleTest.output[index]}}</div>
+                </div>
+            </div>
+            <div class="problem-note">
+                <b>Note</b>
+                <p ng-repeat="noteInfo in showedProblem.note">{{noteInfo}}</p>
+            </div>
         </div>
     </div>
 </div>

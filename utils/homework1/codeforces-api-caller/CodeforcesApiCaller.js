@@ -29,10 +29,10 @@ function CodeforcesApiCaller() {
     this.getContests = function (country) {
         return new Promise((resolve, reject) => {
             const gymContestsLink = 'http://codeforces.com/api/contest.list?gym=true';
-            const notGymContestsLink = 'http://codeforces.com/api/contest.list?gym=false';
+            // const notGymContestsLink = 'http://codeforces.com/api/contest.list?gym=false';
             const activePromises = [
                 get(gymContestsLink),
-                get(notGymContestsLink)
+                // get(notGymContestsLink)
             ];
             const promiseResolver = (resolvedData) => {
                 let contests = [];
@@ -62,7 +62,7 @@ function CodeforcesApiCaller() {
 
     this.getProblemContent = function (contestId, problemIndex) {
         return new Promise((resolve, reject) => {
-            const requestLink = `http://codeforces.com/problemset/problem/${contestId}/${problemIndex}`;
+            const requestLink = `http://codeforces.com/gym/${contestId}/problem/${problemIndex}`;
 
             const getPresContentFrom = (presContainer) => {
                 let contents = [];
@@ -97,14 +97,14 @@ function CodeforcesApiCaller() {
                     'output': getPresContentFrom(testOutputs)
                 };
                 let note = document.getElementsByClassName('note');
-                if (note) {
-                    note = getTextContentFrom(document.getElementsByClassName('note')[0].getElementsByTagName('p'))
+                if (note.innerHTML) {
+                    note = getTextContentFrom(note[0].getElementsByTagName('p'))
                 }
                 resolve({header, story, inputSpecifications, outputSpecifications, sampleTest, note});
             };
             JSDOM.fromURL(requestLink)
                 .then((dom) => resolveProblemContent(dom))
-                .catch((error) => console.error(error));
+                .catch((error) => reject(error));
         });
     };
 }

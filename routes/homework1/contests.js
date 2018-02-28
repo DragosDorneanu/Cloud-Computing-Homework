@@ -19,4 +19,11 @@ router.get('/:contestId/problems', function (request, response) {
         .catch((error) => console.error(error));
 });
 
+router.get(`/:contestId/problems/:problemIndex`, function (request, response) {
+    codeforces
+        .getProblemContent(request.params.contestId, request.params.problemIndex)
+        .then((problemContent) => response.end(JSON.stringify(problemContent)))
+        .catch((error) => response.end(JSON.stringify(error)));
+});
+
 module.exports = router;

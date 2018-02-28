@@ -21,6 +21,13 @@ angular.module('apisCallflow')
                         request.get(serverInfo, `hw1/contests/${contestId}/problems`)
                             .then((response) => resolve(response));
                     });
+                },
+
+                getProblemContent: (contestId, problemIndex) => {
+                    return new Promise((resolve, reject) => {
+                        request.get(serverInfo, `hw1/contests/${contestId}/problems/${problemIndex}`)
+                            .then((response) => resolve(response));
+                    });
                 }
             }
         }]);

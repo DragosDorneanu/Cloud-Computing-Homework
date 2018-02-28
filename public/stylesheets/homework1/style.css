@@ -54,8 +54,20 @@
 }
 
 .problem-btn {
-    flex: 2;
     font-size: 16px !important;
     padding: 3% !important;
     width: 500px;
+}
+
+.centered-problems-statement {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    left: 25%;
+    right: 25%;
+}
+
+.problem-header > p {
+    font-size: 16px;
+    text-align: center;
 }
