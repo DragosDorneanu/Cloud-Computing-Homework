@@ -1,4 +1,4 @@
-angular.module('apisCallflow', ['ngRoute', 'angularMoment'])
+angular.module('apisCallflow', ['ngRoute', 'angularMoment', 'ngAria', 'ngAnimate', 'ngMessages', 'ngMaterial'])
     .config(($routeProvider) => {
         const loginConfig = {
             controller: 'loginController',
