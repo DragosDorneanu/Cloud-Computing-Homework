@@ -67,7 +67,19 @@
     right: 25%;
 }
 
-.problem-header > p {
+.problem-header > p, .problem-story > p,
+.problem-input-specification > p, .problem-output-specification > p,
+.problem-note > p {
+    font-family: Amaranth;
     font-size: 16px;
+}
+
+.problem-header > p {
     text-align: center;
+}
+
+#exit-problem-button {
+    float: right;
+    font-size: 20px;
+    margin: 2px;
 }

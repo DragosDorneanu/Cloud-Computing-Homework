@@ -17,6 +17,9 @@
     </div>
 
     <div ng-show="!fetchingProblems && showingProblem" class="full-size">
+        <span class="glyphicon glyphicon-remove"
+              id="exit-problem-button"
+              ng-click="exitProblem()"></span>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 centered-problems-statement">
             <div class="problem-header page-header">
                 <p ng-repeat="headerInfo in showedProblem.header">{{headerInfo}}</p>
@@ -34,9 +37,15 @@
                 <p ng-repeat="outputSpecification in showedProblem.outputSpecifications">{{outputSpecification}}</p>
             </div>
             <div class="problem-sample-tests">
-                <div ng-repeat="index in showedProblem.sampleTest.length">
-                    <div class="input">{{showedProblem.sampleTest.input[index]}}</div>
-                    <div class="output">{{showedProblem.sampleTest.output[index]}}</div>
+                <div ng-repeat="test in showedProblem.sampleTest">
+                    <div class="input">
+                        <b>Test Input</b>
+                        <pre>{{test[0]}}</pre>
+                    </div>
+                    <div class="output">
+                        <b>Test Output</b>
+                        <pre>{{test[1]}}</pre>
+                    </div>
                 </div>
             </div>
             <div class="problem-note">
