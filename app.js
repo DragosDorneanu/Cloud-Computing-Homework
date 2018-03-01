@@ -8,6 +8,7 @@ const homework1Index = require('./routes/homework1/index');
 const homework1Users = require('./routes/homework1/users');
 const homework1Countries = require('./routes/homework1/countries');
 const homework1Contests = require('./routes/homework1/contests');
+const homework1Razor = require('./routes/homework1/razor');
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use('/hw1', homework1Index);
 app.use('/hw1/users', homework1Users);
 app.use('/hw1/countries', homework1Countries);
 app.use('/hw1/contests', homework1Contests);
+app.use('/hw1/razor', homework1Razor);
 
 module.exports = app;

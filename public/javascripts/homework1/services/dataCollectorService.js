@@ -1,6 +1,6 @@
 angular.module('apisCallflow')
-    .factory('dataCollectorService', ['httpRequestService', 'serverInfo',
-        function (request, serverInfo) {
+    .factory('dataCollectorService', ['httpRequestService', 'serverInfo', 'textRazor',
+        function (request, serverInfo, textRazor) {
             return {
                 getUserData: (userHandler) => {
                     return new Promise((resolve, reject) => {
@@ -27,6 +27,15 @@ angular.module('apisCallflow')
                     return new Promise((resolve, reject) => {
                         request.get(serverInfo, `hw1/contests/${contestId}/problems/${problemIndex}`)
                             .then((response) => resolve(response));
+                    });
+                },
+
+                getTextHyperlinks: (text) => {
+                    return new Promise((resolve, reject) => {
+                        request
+                            .post('hw1/razor', text)
+                            .then((response) => resolve(response))
+                            .catch((error) => reject(error))
                     });
                 }
             }
