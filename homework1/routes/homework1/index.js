@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', function (request, response) {
     const options = {
-        root: 'homework1/public/html'
+        root: 'public/html'
     };
     const callback = (error) => {
         if (error) {
