@@ -18,6 +18,10 @@ function getTodos(request, response, todos) {
 
 function createTodo(request, response, todos) {
     function successfulGotBody(newTodo) {
+        if (newTodo instanceof Array) {
+            httpUtils.sendCustomResponse(response, 400, 'JSON Object is expected instead of JSON Array');
+            return;
+        }
         if (!newTodo['text'] || typeof(newTodo['completed']) === 'undefined') {
             httpUtils.sendCustomResponse(response, 400, 'A todo should have "text" and "completed" properties.');
             return;
@@ -33,7 +37,7 @@ function createTodo(request, response, todos) {
     }
 
     if (request.headers['content-type'] !== 'application/json') {
-        httpUtils.sendCustomResponse(response, 400);
+        httpUtils.sendCustomResponse(response, 400, 'JSON Format is expected');
         return;
     }
     httpUtils
