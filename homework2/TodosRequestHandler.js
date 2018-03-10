@@ -8,7 +8,6 @@ function TodosRequestHandler() {
 
         for (let variablePath in variablePathRequestHandlers) {
             const variablePathTokens = variablePath.split('/');
-
             if (variablePathTokens.length === requestPathTokens.length) {
                 pathVariables = {};
                 for (index = 0; index < requestPathTokens.length; ++index) {
@@ -51,10 +50,7 @@ function TodosRequestHandler() {
         if (!requestHandlers[request.url] || !requestHandlers[request.url][request.method]) {
             const result = getVariablePathMatch(request.url, request.method);
             if (result && result.requestHandler) {
-                request.params = {};
-                for (let param in result.pathVariables) {
-                    request.params[param] = result.pathVariables[param];
-                }
+                request.params = result.pathVariables;
                 result.requestHandler(request, response);
             } else {
                 response.statusCode = 404;
