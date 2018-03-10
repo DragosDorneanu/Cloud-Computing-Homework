@@ -87,6 +87,46 @@ function replaceTodos(request, response, todos) {
         .catch(failedReceivingNewTodos);
 }
 
+function getTodo(request, response, todos) {
+    const todoId = request.params.todoId;
+    if (!todos[todoId]) {
+        httpUtils.sendCustomResponse(response, 404);
+        return;
+    }
+    response.end(JSON.stringify(todos[todoId], undefined, 2));
+}
+
+function updateTodo(request, response, todos) {
+    const todoId = request.params.todoId;
+
+    function successfulReceivedNewTodo(updatedTodo) {
+        if (updatedTodo instanceof Array) {
+            httpUtils.sendCustomResponse(response, 400, 'You should send a JSON object not a JSON array.');
+            return;
+        }
+        if (!updatedTodo['text'] || typeof(updatedTodo['completed']) === 'undefined') {
+            httpUtils.sendCustomResponse(response, 400, 'The JSON todo should contain "text" and "completed" property.');
+            return;
+        }
+        todos[todoId] = updatedTodo;
+        response.end();
+    }
+
+    function failedReceivingNewTodo(error) {
+        console.error(error);
+        httpUtils.sendCustomResponse(response, 500);
+    }
+
+    if (!todos[todoId]) {
+        httpUtils.sendCustomResponse(response, 404);
+        return;
+    }
+    httpUtils
+        .getHttpBody(request)
+        .then(successfulReceivedNewTodo)
+        .catch(failedReceivingNewTodo);
+}
+
 todosRequestHandler.addRequestHandler('/todos', 'GET', (request, response) => {
     getTodos(request, response, todos);
 });
@@ -101,6 +141,13 @@ todosRequestHandler.addRequestHandler('/todos', 'PUT', (request, response) => {
 
 todosRequestHandler.addRequestHandler('/todos', 'DELETE', deleteTodos);
 
+todosRequestHandler.addVariablePathRequestHandler('/todos/:todoId', 'GET', (request, response) => {
+    getTodo(request, response, todos);
+});
+
+todosRequestHandler.addVariablePathRequestHandler('/todos/:todoId', 'PUT', (request, response) => {
+    updateTodo(request, response, todos);
+});
 
 const server = http.createServer(todosRequestHandler.handleRequest);
 
