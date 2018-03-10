@@ -63,7 +63,7 @@ function replaceTodos(request, response, todos) {
         for (let index = 0; index < newTodos.length; ++index) {
             todo = newTodos[index];
             if ((todo instanceof Object)) {
-                if (todo['text'] && todo['completed']) {
+                if (todo['text'] && typeof(todo['completed']) !== 'undefined') {
                     todoId = uuid();
                     todos[todoId] = todo;
                 }
