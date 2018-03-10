@@ -97,15 +97,19 @@ function getTodo(request, response, todos) {
 }
 
 function updateTodo(request, response, todos) {
-    const todoId = request.params.todoId;
-
     function successfulReceivedNewTodo(updatedTodo) {
+        const todoId = request.params.todoId;
         if (updatedTodo instanceof Array) {
             httpUtils.sendCustomResponse(response, 400, 'You should send a JSON object not a JSON array.');
             return;
         }
         if (!updatedTodo['text'] || typeof(updatedTodo['completed']) === 'undefined') {
             httpUtils.sendCustomResponse(response, 400, 'The JSON todo should contain "text" and "completed" property.');
+            return;
+        }
+        if (!todos[todoId]) {
+            todos[todoId] = updatedTodo;
+            httpUtils.sendCustomResponse(response, 201);
             return;
         }
         todos[todoId] = updatedTodo;
@@ -117,14 +121,20 @@ function updateTodo(request, response, todos) {
         httpUtils.sendCustomResponse(response, 500);
     }
 
-    if (!todos[todoId]) {
-        httpUtils.sendCustomResponse(response, 404);
-        return;
-    }
     httpUtils
         .getHttpBody(request)
         .then(successfulReceivedNewTodo)
         .catch(failedReceivingNewTodo);
+}
+
+function deleteTodo(request, response, todos) {
+    const todoId = request.params.todoId;
+    if (!todos[todoId]) {
+        httpUtils.sendCustomResponse(response, 404);
+        return;
+    }
+    delete todos[todoId];
+    response.end();
 }
 
 todosRequestHandler.addRequestHandler('/todos', 'GET', (request, response) => {
@@ -147,6 +157,10 @@ todosRequestHandler.addVariablePathRequestHandler('/todos/:todoId', 'GET', (requ
 
 todosRequestHandler.addVariablePathRequestHandler('/todos/:todoId', 'PUT', (request, response) => {
     updateTodo(request, response, todos);
+});
+
+todosRequestHandler.addVariablePathRequestHandler('/todos/:todoId', 'DELETE', (request, response) => {
+    deleteTodo(request, response, todos);
 });
 
 const server = http.createServer(todosRequestHandler.handleRequest);
