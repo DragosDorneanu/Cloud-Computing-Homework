@@ -6,7 +6,9 @@ function getHttpBody(httpEntity) {
         });
 
         httpEntity.on('end', () => {
-            content = JSON.parse(content);
+            if (content) {
+                content = JSON.parse(content);
+            }
             resolve(content);
         });
 
