@@ -163,6 +163,11 @@ todosRequestHandler.addVariablePathRequestHandler('/todos/:todoId', 'PUT', (requ
     updateTodo(request, response, todos);
 });
 
+todosRequestHandler.addVariablePathRequestHandler('/todos/:todoId', 'POST', (request, response) => {
+    response.statusCode = 501;
+    response.end();
+});
+
 todosRequestHandler.addVariablePathRequestHandler('/todos/:todoId', 'DELETE', (request, response) => {
     deleteTodo(request, response, todos);
 });
